@@ -55,8 +55,8 @@ const Register = () => {
         <div className="text-center">
           <h1 className="text-5xl font-bold">Register Here!</h1>
         </div>
-        <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+        <div className="card w-full shadow-2xl bg-base-100">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-2">
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-lg font-medium">Name</span>
@@ -169,10 +169,10 @@ const Register = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>
-            <div>
-              <SocialLogin></SocialLogin>
-            </div>
           </form>
+          <div>
+            <SocialLogin></SocialLogin>
+          </div>
         </div>
       </div>
     </div>

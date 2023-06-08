@@ -32,8 +32,8 @@ const Login = () => {
         <div className="text-center">
           <h1 className="text-5xl font-bold">Login now!</h1>
         </div>
-        <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+        <div className="card w-full shadow-2xl bg-base-100">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body pb-2">
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-lg font-medium">Email</span>
@@ -58,7 +58,7 @@ const Login = () => {
                 {...register("password", {
                   required: true,
                   minLength: 6,
-                  pattern: /^(?=.*[A-Z])/,
+                  pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
                 })}
                 type={hide ? "password" : "text"}
                 placeholder="password"
@@ -91,10 +91,10 @@ const Login = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
-            <div>
-              <SocialLogin></SocialLogin>
-            </div>
           </form>
+          <div>
+            <SocialLogin></SocialLogin>
+          </div>
         </div>
       </div>
     </div>
