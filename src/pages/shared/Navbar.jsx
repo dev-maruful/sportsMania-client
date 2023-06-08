@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   const navItems = (
     <>
       <li>
-        <a>Home</a>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <a>Instructors</a>
@@ -12,15 +16,22 @@ const Navbar = () => {
       <li>
         <a>Classes</a>
       </li>
+      {user && (
+        <>
+          <li>
+            <a>Dashboard</a>
+          </li>
+          <li>
+            <div className="avatar">
+              <div className="w-12 rounded-full">
+                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </div>
+          </li>
+        </>
+      )}
       <li>
-        <a>Dashboard</a>
-      </li>
-      <li>
-        <div className="avatar">
-          <div className="w-12 rounded-full">
-            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-          </div>
-        </div>
+        <Link to="/login">Login</Link>
       </li>
     </>
   );
