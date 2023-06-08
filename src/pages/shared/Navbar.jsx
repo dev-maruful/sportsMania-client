@@ -1,9 +1,20 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        toast.success("User logged out");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
 
   const navItems = (
     <>
@@ -21,18 +32,24 @@ const Navbar = () => {
           <li>
             <a>Dashboard</a>
           </li>
+
+          <li>
+            <a onClick={handleLogout}>Logout</a>
+          </li>
           <li>
             <div className="avatar">
               <div className="w-12 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img src={user?.photoURL} />
               </div>
             </div>
           </li>
         </>
       )}
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
+      {!user && (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
   );
 

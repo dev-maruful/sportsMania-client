@@ -1,21 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
 import SocialLogin from "../../components/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
 
 const Register = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    if (data.password !== data.confirmPass) {
+    if (data?.password !== data?.confirmPass) {
       return toast.error("Password and confirm password do not match");
     }
+
+    createUser(data?.email, data?.password).then((result) => {
+      const loggedUser = result?.user;
+      console.log(loggedUser);
+
+      updateUserProfile(data?.name, data?.photoURL)
+        .then(() => {
+          const saveUser = { name: data?.name, email: data?.email };
+
+          axios
+            .post("http://localhost:5000/users", saveUser)
+            .then((data) => {
+              console.log(data?.data);
+              data?.data.insertedId &&
+                toast.success("User created successfully");
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error(err.message);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
 
     console.log(data);
   };
@@ -71,7 +100,7 @@ const Register = () => {
                   {...register("password", {
                     required: true,
                     minLength: 6,
-                    pattern: /^(?=.*[A-Z])/,
+                    pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
                   })}
                   type="text"
                   placeholder="password"
@@ -89,7 +118,8 @@ const Register = () => {
                 )}
                 {errors.password?.type === "pattern" && (
                   <p className="text-error" role="alert">
-                    Password must be include at least one capital letter
+                    Password must be include at least one capital letter and one
+                    special character
                   </p>
                 )}
               </div>
@@ -103,12 +133,18 @@ const Register = () => {
                   {...register("confirmPass", {
                     required: true,
                     minLength: 6,
-                    pattern: /^(?=.*[A-Z])/,
+                    pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
                   })}
                   type="text"
                   placeholder="confirm password"
                   className="input input-bordered"
                 />
+                {errors.password?.type === "pattern" && (
+                  <p className="text-error" role="alert">
+                    Password must be include at least one capital letter and one
+                    special character
+                  </p>
+                )}
               </div>
             </div>
             <div className="form-control">
@@ -144,3 +180,19 @@ const Register = () => {
 };
 
 export default Register;
+
+// fetch("http://localhost:5000/users", {
+//   method: "POST",
+//   headers: {
+//     "content-type": "application/json",
+//   },
+//   body: JSON.stringify(saveUser),
+// })
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//     if (data.insertedId) {
+//       toast.success("User created successfully");
+//       navigate("/");
+//     }
+//   });

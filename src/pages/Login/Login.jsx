@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
   const [hide, setHide] = useState(true);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    login(data?.email, data?.password)
+      .then(() => {
+        toast.success("User Login Successful");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
 
   return (
     <div className="hero p-10 bg-base-200">
@@ -13,26 +33,48 @@ const Login = () => {
           <h1 className="text-5xl font-bold">Login now!</h1>
         </div>
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-          <div className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-lg font-medium">Email</span>
               </label>
               <input
+                {...register("email", { required: true })}
                 type="text"
                 placeholder="email"
                 className="input input-bordered"
               />
+              {errors.email?.type === "required" && (
+                <p className="text-error" role="alert">
+                  Email is required
+                </p>
+              )}
             </div>
             <div className="form-control relative">
               <label className="label">
                 <span className="label-text text-lg font-medium">Password</span>
               </label>
               <input
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  pattern: /^(?=.*[A-Z])/,
+                })}
                 type={hide ? "password" : "text"}
                 placeholder="password"
                 className="input input-bordered"
               />
+              {errors.password?.type === "required" && (
+                <p className="text-error" role="alert">
+                  Password is required
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-error" role="alert">
+                  Password must be include at least one capital letter and one
+                  special character
+                </p>
+              )}
               <div
                 onClick={() => setHide(!hide)}
                 className="absolute right-4 bottom-4 cursor-pointer"
@@ -52,7 +94,7 @@ const Login = () => {
             <div>
               <SocialLogin></SocialLogin>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
