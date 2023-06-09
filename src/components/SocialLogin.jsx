@@ -13,6 +13,7 @@ const SocialLogin = () => {
         const saveUser = {
           name: result?.user?.displayName,
           email: result?.user?.email,
+          photo: result?.user?.photoURL,
         };
 
         axios

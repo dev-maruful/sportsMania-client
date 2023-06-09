@@ -30,7 +30,7 @@ const Navbar = () => {
       {user && (
         <>
           <li>
-            <a>Dashboard</a>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
 
           <li>

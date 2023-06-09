@@ -26,7 +26,11 @@ const Register = () => {
 
       updateUserProfile(data?.name, data?.photoURL)
         .then(() => {
-          const saveUser = { name: data?.name, email: data?.email };
+          const saveUser = {
+            name: data?.name,
+            email: data?.email,
+            photo: data?.photoURL,
+          };
 
           axios
             .post("http://localhost:5000/users", saveUser)
@@ -154,11 +158,16 @@ const Register = () => {
                 </span>
               </label>
               <input
-                {...register("photoURL", { maxLength: 2000 })}
+                {...register("photoURL", { required: true, maxLength: 2000 })}
                 type="text"
                 placeholder="photo url"
                 className="input input-bordered"
               />
+              {errors.photoURL?.type === "required" && (
+                <p className="text-error" role="alert">
+                  Photo URL is required
+                </p>
+              )}
             </div>
             <p className="text-sm">
               Already have an account?{" "}
