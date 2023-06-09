@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const navItems = (
     <>
-      <li>
+      <li tabIndex={0}>
         <Link to="/">Home</Link>
       </li>
       <li>
@@ -80,15 +80,12 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-4xl font-bold">
+        <Link className="btn btn-ghost normal-case text-4xl font-bold">
           SportsMania
-        </a>
+        </Link>
       </div>
       <div className="navbar-end hidden lg:flex">
-        <ul
-          tabIndex={0}
-          className="flex items-center menu menu-horizontal px-1 text-xl font-semibold"
-        >
+        <ul className="flex items-center menu menu-horizontal px-1 text-xl font-semibold">
           {navItems}
         </ul>
       </div>
