@@ -18,7 +18,6 @@ const SocialLogin = () => {
         axios
           .post("http://localhost:5000/users", saveUser)
           .then((data) => {
-            console.log(data);
             data?.data.insertedId &&
               toast.success("User logged in successfully");
           })
