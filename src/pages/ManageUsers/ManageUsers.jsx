@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
 import SectionTitle from "../../components/SectionTitle";
 import { toast } from "react-hot-toast";
 
 const ManageUsers = () => {
-  const [admin, setAdmin] = useState(false);
-  const [instructor, setInstructor] = useState(false);
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await fetch("http://localhost:5000/users");
     return res.json();
@@ -18,8 +16,6 @@ const ManageUsers = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          setAdmin(true);
-          setInstructor(false);
           refetch();
           toast.success(`${user?.name} is an Admin now!`);
         }
@@ -33,8 +29,6 @@ const ManageUsers = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          setInstructor(true);
-          setAdmin(false);
           refetch();
           toast.success(`${user?.name} is an Instructor now!`);
         }
@@ -67,7 +61,6 @@ const ManageUsers = () => {
                     "Instructor"
                   ) : (
                     <button
-                      disabled={instructor}
                       onClick={() => handleMakeInstructor(user)}
                       className={`btn btn-primary btn-outline
                       }`}
@@ -81,7 +74,6 @@ const ManageUsers = () => {
                     "Admin"
                   ) : (
                     <button
-                      disabled={admin}
                       onClick={() => handleMakeAdmin(user)}
                       className={`btn btn-primary btn-outline
                       }`}

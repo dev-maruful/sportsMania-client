@@ -13,8 +13,6 @@ const PopularClasses = () => {
     });
   }, []);
 
-  console.log(classes);
-
   return (
     <div className="mb-32">
       <SectionTitle header="Popular Classes"></SectionTitle>
