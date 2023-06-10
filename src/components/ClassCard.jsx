@@ -1,6 +1,12 @@
 import React from "react";
 
-const ClassCard = ({ name, picture, numStudents, availableSeats }) => {
+const ClassCard = ({
+  name,
+  picture,
+  numStudents,
+  availableSeats,
+  subHeading,
+}) => {
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <figure>
@@ -18,6 +24,7 @@ const ClassCard = ({ name, picture, numStudents, availableSeats }) => {
             Available seats: {availableSeats}
           </p>
         )}
+        {subHeading && <p className="text-lg font-medium">{subHeading}</p>}
       </div>
     </div>
   );
