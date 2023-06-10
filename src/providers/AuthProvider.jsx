@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export const AuthContext = createContext(null);
 
@@ -20,6 +21,7 @@ const googleProvide = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [axiosSecure] = useAxiosSecure();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -51,6 +53,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+
+      // get and set token
+      if (currentUser) {
+        axiosSecure.post("/jwt", { email: currentUser?.email }).then((data) => {
+          const token = data?.data?.token;
+          localStorage.setItem("access-token", token);
+        });
+      } else {
+        localStorage.removeItem("access-token");
+      }
+
       setLoading(false);
     });
     return () => unsubscribe();
