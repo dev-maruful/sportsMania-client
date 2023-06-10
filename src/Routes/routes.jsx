@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ManageClasses from "../pages/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/ManageUsers/ManageUsers";
+import Instructors from "../pages/Instructors/Instructors";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "instructors",
+        element: <Instructors></Instructors>,
       },
       {
         path: "/dashboard/manageclasses",

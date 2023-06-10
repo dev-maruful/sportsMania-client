@@ -8,7 +8,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Dashboard = () => {
-  const isAdmin = true;
   const { user } = useContext(AuthContext);
   const [userRole, setUserRole] = useState([]);
   const axiosSecure = useAxiosSecure();
