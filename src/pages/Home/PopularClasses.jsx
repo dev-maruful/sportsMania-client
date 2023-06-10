@@ -20,10 +20,10 @@ const PopularClasses = () => {
         {classes.slice(0, 6).map((singleClass) => (
           <ClassCard
             key={singleClass?._id}
-            name={singleClass?.name}
-            picture={singleClass?.picture}
+            name={singleClass?.className}
+            picture={singleClass?.classImage}
             numStudents={singleClass?.numStudents}
-            availableSeats={singleClass?.availableSeats}
+            availableSeats={singleClass?.seats}
           ></ClassCard>
         ))}
       </div>
