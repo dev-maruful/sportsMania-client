@@ -5,7 +5,7 @@ import ClassCard from "../../components/ClassCard";
 
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
-  const [axiosSecure] = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axiosSecure("/classes").then((data) => {

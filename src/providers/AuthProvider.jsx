@@ -21,7 +21,7 @@ const googleProvide = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [axiosSecure] = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -55,14 +55,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       // get and set token
-      if (currentUser) {
-        axiosSecure.post("/jwt", { email: currentUser?.email }).then((data) => {
-          const token = data?.data?.token;
-          localStorage.setItem("access-token", token);
-        });
-      } else {
-        localStorage.removeItem("access-token");
-      }
+      // if (currentUser) {
+      //   axiosSecure.post("/jwt", { email: currentUser?.email }).then((data) => {
+      //     const token = data?.data?.token;
+      //     localStorage.setItem("access-token", token);
+      //   });
+      // } else {
+      //   localStorage.removeItem("access-token");
+      // }
 
       setLoading(false);
     });
@@ -77,6 +77,7 @@ const AuthProvider = ({ children }) => {
     login,
     logout,
     loginWithGoogle,
+    setLoading,
   };
 
   return (

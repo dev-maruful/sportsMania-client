@@ -1,15 +1,29 @@
 import React from "react";
 import SectionTitle from "../../components/SectionTitle";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Dashboard = () => {
-  // TODO: load data from server to verify admin and instructor
-  const isInstructor = false;
   const isAdmin = true;
+  const { user } = useContext(AuthContext);
+  const [userRole, setUserRole] = useState([]);
+  const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    axiosSecure(`/users/${user?.email}`).then((data) => {
+      setUserRole(data?.data);
+    });
+  }, [user]);
+
+  console.log(userRole);
 
   return (
     <div>
-      {isAdmin ? (
+      {userRole?.role === "admin" ? (
         <div className="min-h-[calc(100vh-400px)] flex flex-col justify-center items-center gap-5">
           <SectionTitle header="Admin Dashboard"></SectionTitle>
           <div className="flex justify-center items-center gap-5">
@@ -25,7 +39,7 @@ const Dashboard = () => {
             </Link>
           </div>
         </div>
-      ) : isInstructor ? (
+      ) : userRole?.role === "instructor" ? (
         <div className="min-h-[calc(100vh-400px)] flex flex-col justify-center items-center gap-5">
           <SectionTitle header="Instructor Dashboard"></SectionTitle>
           <div className="flex justify-center items-center gap-5">
