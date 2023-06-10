@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import SectionTitle from "../../components/SectionTitle";
+import SectionTitle from "../../../../components/SectionTitle";
 import { toast } from "react-hot-toast";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();

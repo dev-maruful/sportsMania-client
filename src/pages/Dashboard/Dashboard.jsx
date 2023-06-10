@@ -42,8 +42,16 @@ const Dashboard = () => {
         <div className="min-h-[calc(100vh-400px)] flex flex-col justify-center items-center gap-5">
           <SectionTitle header="Instructor Dashboard"></SectionTitle>
           <div className="flex justify-center items-center gap-5">
-            <button className="btn btn-primary btn-outline">Add a class</button>
-            <button className="btn btn-primary btn-outline">My classes</button>
+            <Link to="/dashboard/addaclass">
+              <button className="btn btn-primary btn-outline">
+                Add a class
+              </button>
+            </Link>
+            <Link to="/dashboard/instructorclasses">
+              <button className="btn btn-primary btn-outline">
+                My classes
+              </button>
+            </Link>
           </div>
         </div>
       ) : (

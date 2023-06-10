@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect } from "react";
-import SectionTitle from "../../components/SectionTitle";
-import InstructorsCard from "../../components/InstructorsCard";
+import SectionTitle from "../../../components/SectionTitle";
+import InstructorsCard from "../../../components/InstructorsCard";
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);

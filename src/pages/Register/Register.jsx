@@ -189,19 +189,3 @@ const Register = () => {
 };
 
 export default Register;
-
-// fetch("http://localhost:5000/users", {
-//   method: "POST",
-//   headers: {
-//     "content-type": "application/json",
-//   },
-//   body: JSON.stringify(saveUser),
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log(data);
-//     if (data.insertedId) {
-//       toast.success("User created successfully");
-//       navigate("/");
-//     }
-//   });
