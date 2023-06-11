@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -10,6 +10,10 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const [hide, setHide] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -20,6 +24,7 @@ const Login = () => {
     login(data?.email, data?.password)
       .then(() => {
         toast.success("User Login Successful");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.code);

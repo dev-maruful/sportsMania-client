@@ -10,6 +10,10 @@ import Instructors from "../pages/Dashboard/Instructors/Instructors";
 import AddAClass from "../pages/Dashboard/Instructors/AddAClass";
 import InstructorClasses from "../pages/Dashboard/Instructors/InstructorClasses";
 import Classes from "../pages/Classes/Classes";
+import StudentsSelectedClasses from "../pages/StudentsSelectedClasses/StudentsSelectedClasses";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,19 +46,43 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manageclasses",
-        element: <ManageClasses></ManageClasses>,
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/manageusers",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/addaclass",
-        element: <AddAClass></AddAClass>,
+        element: (
+          <InstructorRoute>
+            <AddAClass></AddAClass>
+          </InstructorRoute>
+        ),
       },
       {
         path: "/dashboard/instructorclasses",
-        element: <InstructorClasses></InstructorClasses>,
+        element: (
+          <InstructorRoute>
+            <InstructorClasses></InstructorClasses>
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "/dashboard/studentsclasses",
+        element: (
+          <PrivateRoute>
+            <StudentsSelectedClasses></StudentsSelectedClasses>
+          </PrivateRoute>
+        ),
       },
     ],
   },

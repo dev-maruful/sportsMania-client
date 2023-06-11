@@ -22,7 +22,6 @@ const Register = () => {
 
     createUser(data?.email, data?.password).then((result) => {
       const loggedUser = result?.user;
-      console.log(loggedUser);
 
       updateUserProfile(data?.name, data?.photoURL)
         .then(() => {
@@ -35,7 +34,6 @@ const Register = () => {
           axios
             .post("http://localhost:5000/users", saveUser)
             .then((data) => {
-              console.log(data?.data);
               data?.data.insertedId &&
                 toast.success("User created successfully");
               navigate("/");
@@ -49,8 +47,6 @@ const Register = () => {
           console.log(error);
         });
     });
-
-    console.log(data);
   };
 
   return (

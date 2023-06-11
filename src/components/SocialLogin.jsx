@@ -1,26 +1,33 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-hot-toast";
-import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { loginWithGoogle } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleGoogleLogin = () => {
     loginWithGoogle()
       .then((result) => {
-        console.log(result.user);
         const saveUser = {
           name: result?.user?.displayName,
           email: result?.user?.email,
           photo: result?.user?.photoURL,
         };
 
-        axios
-          .post("http://localhost:5000/users", saveUser)
+        axiosSecure
+          .post("/users", saveUser)
           .then((data) => {
-            data?.data.insertedId &&
+            if (data?.data?.insertedId || data?.data?.message) {
               toast.success("User logged in successfully");
+              navigate(from, { replace: true });
+            }
           })
           .catch((err) => {
             console.log(err);

@@ -56,9 +56,11 @@ const Dashboard = () => {
         <div className="min-h-[calc(100vh-400px)] flex flex-col justify-center items-center gap-5">
           <SectionTitle header="Student Dashboard"></SectionTitle>
           <div className="flex justify-center items-center gap-5">
-            <button className="btn btn-primary btn-outline">
-              My selected classes
-            </button>
+            <Link to="/dashboard/studentsclasses">
+              <button className="btn btn-primary btn-outline">
+                My selected classes
+              </button>
+            </Link>
             <button className="btn btn-primary btn-outline">
               My enrolled classes
             </button>

@@ -1,4 +1,8 @@
 import React from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const InstructorClassCard = ({
   name,
@@ -10,6 +14,26 @@ const InstructorClassCard = ({
   instructorName,
   seats,
 }) => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const handleSelectClass = () => {
+    const selectedClass = {
+      studentName: user?.displayName,
+      studentEmail: user?.email,
+      className: name,
+      photo,
+      instructorName,
+      price,
+      seats,
+    };
+
+    axiosSecure.post("/classes/studentselected", selectedClass).then((data) => {
+      if (data?.data?.insertedId) {
+        toast.success("Class selected successfully");
+      }
+    });
+  };
+
   return (
     <div
       className={`card card-side bg-base-100 ${
@@ -57,9 +81,17 @@ const InstructorClassCard = ({
             </p>
           )}
           <div className="card-actions">
-            <button className="btn btn-primary btn-outline">
-              {seats ? "select" : "update"}
-            </button>
+            {seats && (
+              <button
+                onClick={handleSelectClass}
+                className="btn btn-primary btn-outline"
+              >
+                select
+              </button>
+            )}
+            {!seats && (
+              <button className="btn btn-primary btn-outline">update</button>
+            )}
           </div>
         </div>
       </div>
