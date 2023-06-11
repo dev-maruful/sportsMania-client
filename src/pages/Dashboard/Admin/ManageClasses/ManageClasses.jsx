@@ -10,7 +10,15 @@ const ManageClasses = () => {
     const res = await axiosSecure("/classes");
     return res.data;
   });
-  console.log(classes);
+
+  const handleApprove = (id) => {
+    axiosSecure.patch(`/classes/approved/${id}`).then((data) => {
+      if (data?.data?.modifiedCount) {
+        refetch();
+        toast.success(`Class approved successfully`);
+      }
+    });
+  };
 
   return (
     <div className="max-w-7xl mx-auto flex flex-col items-center mb-20">
@@ -18,7 +26,8 @@ const ManageClasses = () => {
       <div>
         {classes.map((singleClass) => (
           <ManageClassesCard
-            key={singleClass._id}
+            key={singleClass?._id}
+            id={singleClass?._id}
             classImage={singleClass?.classImage}
             className={singleClass?.className}
             instructorName={singleClass?.instructorName}
@@ -26,6 +35,7 @@ const ManageClasses = () => {
             price={singleClass?.price}
             availableSeats={singleClass?.seats}
             status={singleClass?.status}
+            handleApprove={handleApprove}
           ></ManageClassesCard>
         ))}
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 
 const ManageClassesCard = ({
+  id,
   classImage,
   className,
   instructorName,
@@ -8,6 +9,7 @@ const ManageClassesCard = ({
   availableSeats,
   price,
   status,
+  handleApprove,
 }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl max-w-6xl mb-5">
@@ -15,15 +17,32 @@ const ManageClassesCard = ({
         <img src={classImage} alt="" />
       </figure>
       <div className="card-body w-1/2">
-        <h2 className="card-title">Class Name : {className}</h2>
-        <p>Instructor Name : {instructorName}</p>
-        <p>Instructor Email : {instructorEmail}</p>
-        <p>Available Seats : {availableSeats}</p>
-        <p>Price : ${price}</p>
-        <p>Status : {status}</p>
-        <div className="flex gap-5">
+        <h2 className="card-title text-2xl font-bold">
+          Class Name : {className}
+        </h2>
+        <p className="text-lg font-medium">
+          Instructor Name : {instructorName}
+        </p>
+        <p className="text-base font-medium">
+          Instructor Email : {instructorEmail}
+        </p>
+        <p className="text-base font-medium">
+          Available Seats : {availableSeats}
+        </p>
+        <p className="text-base font-medium">Price : ${price}</p>
+        <p className="text-base font-medium">Status : {status}</p>
+        <div className="flex gap-5 items-center">
           <div className="card-actions">
-            <button className="btn btn-success">Approve</button>
+            {status === "pending" ? (
+              <button
+                onClick={() => handleApprove(id)}
+                className="btn btn-success"
+              >
+                Approve
+              </button>
+            ) : (
+              "Approved"
+            )}
           </div>
           <div className="card-actions">
             <button className="btn btn-error">Deny</button>
