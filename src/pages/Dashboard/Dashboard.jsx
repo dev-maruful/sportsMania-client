@@ -18,8 +18,6 @@ const Dashboard = () => {
     });
   }, [user]);
 
-  console.log(userRole);
-
   return (
     <div>
       {userRole?.role === "admin" ? (
