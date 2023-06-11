@@ -18,8 +18,6 @@ const InstructorClasses = () => {
     });
   }, [user]);
 
-  console.log(classes);
-
   return (
     <div className="max-w-7xl mx-auto mb-20">
       <SectionTitle header="My Classes"></SectionTitle>
