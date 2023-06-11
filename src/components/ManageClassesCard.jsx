@@ -30,22 +30,28 @@ const ManageClassesCard = ({
           Available Seats : {availableSeats}
         </p>
         <p className="text-base font-medium">Price : ${price}</p>
-        <p className="text-base font-medium">Status : {status}</p>
+        <p className="text-base font-medium">
+          Status :{" "}
+          <span
+            className={`${status === "approved" && "text-success font-bold"}`}
+          >
+            {status}
+          </span>
+        </p>
         <div className="flex gap-5 items-center">
           <div className="card-actions">
-            {status === "pending" ? (
-              <button
-                onClick={() => handleApprove(id)}
-                className="btn btn-success"
-              >
-                Approve
-              </button>
-            ) : (
-              "Approved"
-            )}
+            <button
+              disabled={status === "approved"}
+              onClick={() => handleApprove(id)}
+              className="btn btn-success"
+            >
+              Approve
+            </button>
           </div>
           <div className="card-actions">
-            <button className="btn btn-error">Deny</button>
+            <button disabled={status === "approved"} className="btn btn-error">
+              Deny
+            </button>
           </div>
           <div className="card-actions">
             <button className="btn btn-warning">Send Feedback</button>
