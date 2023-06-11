@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../../components/SectionTitle";
 import ManageClassesCard from "../../../../components/ManageClassesCard";
+import { toast } from "react-hot-toast";
 
 const ManageClasses = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,6 +17,15 @@ const ManageClasses = () => {
       if (data?.data?.modifiedCount) {
         refetch();
         toast.success(`Class approved successfully`);
+      }
+    });
+  };
+
+  const handleDeny = (id) => {
+    axiosSecure.patch(`/classes/denied/${id}`).then((data) => {
+      if (data?.data?.modifiedCount) {
+        refetch();
+        toast.success(`Class denied successfully`);
       }
     });
   };
@@ -36,6 +46,7 @@ const ManageClasses = () => {
             availableSeats={singleClass?.seats}
             status={singleClass?.status}
             handleApprove={handleApprove}
+            handleDeny={handleDeny}
           ></ManageClassesCard>
         ))}
       </div>

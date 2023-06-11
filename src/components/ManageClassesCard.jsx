@@ -10,6 +10,7 @@ const ManageClassesCard = ({
   price,
   status,
   handleApprove,
+  handleDeny,
 }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl max-w-6xl mb-5">
@@ -33,7 +34,13 @@ const ManageClassesCard = ({
         <p className="text-base font-medium">
           Status :{" "}
           <span
-            className={`${status === "approved" && "text-success font-bold"}`}
+            className={`${
+              status === "approved"
+                ? "text-success font-bold"
+                : status === "denied"
+                ? "text-error font-bold"
+                : ""
+            }`}
           >
             {status}
           </span>
@@ -41,7 +48,7 @@ const ManageClassesCard = ({
         <div className="flex gap-5 items-center">
           <div className="card-actions">
             <button
-              disabled={status === "approved"}
+              disabled={status === "approved" || status === "denied"}
               onClick={() => handleApprove(id)}
               className="btn btn-success"
             >
@@ -49,7 +56,11 @@ const ManageClassesCard = ({
             </button>
           </div>
           <div className="card-actions">
-            <button disabled={status === "approved"} className="btn btn-error">
+            <button
+              onClick={() => handleDeny(id)}
+              disabled={status === "approved" || status === "denied"}
+              className="btn btn-error"
+            >
               Deny
             </button>
           </div>
