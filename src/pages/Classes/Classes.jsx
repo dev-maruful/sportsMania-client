@@ -22,6 +22,7 @@ const Classes = () => {
         {classes.map((singleClass) => (
           <InstructorClassCard
             key={singleClass?._id}
+            id={singleClass?._id}
             name={singleClass?.className}
             photo={singleClass?.classImage}
             price={singleClass?.price}

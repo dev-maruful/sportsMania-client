@@ -27,9 +27,11 @@ const InstructorClassCard = ({
       seats,
     };
 
-    axiosSecure.post("/classes/studentselected", selectedClass).then((data) => {
+    axiosSecure.post(`/classes/studentselected`, selectedClass).then((data) => {
       if (data?.data?.insertedId) {
         toast.success("Class selected successfully");
+      } else if (data?.data?.message === "Class already selected") {
+        toast.error(data?.data?.message);
       }
     });
   };
