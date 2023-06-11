@@ -14,7 +14,6 @@ const NatureActivities = () => {
       setNatures(data?.data);
     });
   }, []);
-  console.log(natures);
 
   return (
     <div className="mb-32">

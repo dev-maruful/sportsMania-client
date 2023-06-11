@@ -12,6 +12,7 @@ const Footer = () => {
         <p>Copyright © 2023 - All right reserved</p>
       </div>
       <div>
+        <p className="font-medium">Contact With Us On:</p>
         <div className="grid grid-flow-col gap-4">
           <a>
             <svg

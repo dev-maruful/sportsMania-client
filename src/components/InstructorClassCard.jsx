@@ -8,6 +8,8 @@ const InstructorClassCard = ({
   price,
   feedback,
 }) => {
+  console.log(feedback);
+
   return (
     <div className="card card-side bg-base-100 shadow-xl mb-5 max-w-5xl mx-auto">
       <figure className="w-1/2">
@@ -16,7 +18,20 @@ const InstructorClassCard = ({
       <div className="card-body w-1/2">
         <div className="flex flex-col gap-2">
           <h2 className="card-title text-xl font-bold">{name}</h2>
-          <p className="text-base font-medium">Status : {status}</p>
+          <p className="text-base font-medium">
+            Status :{" "}
+            <span
+              className={`${
+                status === "approved"
+                  ? "text-success font-bold"
+                  : status === "denied"
+                  ? "text-error font-bold"
+                  : ""
+              }`}
+            >
+              {status}
+            </span>
+          </p>
           <p className="text-base font-medium">Price : ${price}</p>
           <p className="text-base font-medium">
             Total enrolled Students : {enrolledStudents ? enrolledStudents : 0}

@@ -18,6 +18,8 @@ const InstructorClasses = () => {
     });
   }, [user]);
 
+  console.log(classes);
+
   return (
     <div className="max-w-7xl mx-auto mb-20">
       <SectionTitle header="My Classes"></SectionTitle>
@@ -30,6 +32,7 @@ const InstructorClasses = () => {
             enrolledStudents={singleClass?.enrolledStudents}
             price={singleClass?.price}
             status={singleClass?.status}
+            feedback={singleClass?.feedback}
           ></InstructorClassCard>
         ))}
       </div>

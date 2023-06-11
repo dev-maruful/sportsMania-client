@@ -9,6 +9,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Instructors from "../pages/Dashboard/Instructors/Instructors";
 import AddAClass from "../pages/Dashboard/Instructors/AddAClass";
 import InstructorClasses from "../pages/Dashboard/Instructors/InstructorClasses";
+import SendFeedback from "../pages/SendFeedback/SendFeedback";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/manageclasses",
         element: <ManageClasses></ManageClasses>,
+      },
+      {
+        path: "/dashboard/manageclasses/sendfeedback",
+        element: <SendFeedback></SendFeedback>,
       },
       {
         path: "/dashboard/manageusers",
