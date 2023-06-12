@@ -43,7 +43,7 @@ const ManageClasses = () => {
             instructorName={singleClass?.instructorName}
             instructorEmail={singleClass?.instructorEmail}
             price={singleClass?.price}
-            availableSeats={singleClass?.seats}
+            availableSeats={singleClass?.availableSeats}
             status={singleClass?.status}
             handleApprove={handleApprove}
             handleDeny={handleDeny}

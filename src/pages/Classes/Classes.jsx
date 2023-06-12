@@ -17,7 +17,7 @@ const Classes = () => {
 
   return (
     <div className="max-w-7xl mx-auto mb-20">
-      <SectionTitle header="All Classes"></SectionTitle>
+      <SectionTitle header={`All Classes : ${classes.length}`}></SectionTitle>
       <div>
         {classes.map((singleClass) => (
           <InstructorClassCard
@@ -26,8 +26,9 @@ const Classes = () => {
             name={singleClass?.className}
             photo={singleClass?.classImage}
             price={singleClass?.price}
-            seats={singleClass?.seats}
+            seats={singleClass?.availableSeats}
             instructorName={singleClass?.instructorName}
+            enrolledStudents={singleClass?.enrolled}
           ></InstructorClassCard>
         ))}
       </div>

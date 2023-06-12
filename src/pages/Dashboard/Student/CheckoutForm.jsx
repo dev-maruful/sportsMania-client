@@ -12,6 +12,13 @@ const CheckoutForm = ({ price, className, id, instructorName, image }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
+  const [classes, setClasses] = useState([]);
+
+  useEffect(() => {
+    axiosSecure("/classes/approvedclasses").then((data) => {
+      setClasses(data?.data);
+    });
+  }, []);
 
   useEffect(() => {
     if (price > 0) {
@@ -60,6 +67,19 @@ const CheckoutForm = ({ price, className, id, instructorName, image }) => {
     if (paymentIntent.status === "succeeded") {
       toast.success("Payment successful");
       setTransactionId(paymentIntent.id);
+
+      const updatedSeat = classes.map((cls) => {
+        if (cls.className === className) {
+          axiosSecure
+            .put(`/classes/approved/${className}`, {
+              availableSeats: cls.availableSeats - 1,
+              enrolled: cls.enrolled + 1,
+            })
+            .then((data) => {});
+        }
+      });
+      setClasses(updatedSeat);
+
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,

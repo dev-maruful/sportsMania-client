@@ -22,7 +22,7 @@ const PopularClasses = () => {
             key={singleClass?._id}
             name={singleClass?.className}
             picture={singleClass?.classImage}
-            numStudents={singleClass?.numStudents}
+            numStudents={singleClass?.enrolled}
             availableSeats={singleClass?.seats}
           ></ClassCard>
         ))}

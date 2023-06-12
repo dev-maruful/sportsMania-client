@@ -27,10 +27,11 @@ const InstructorClasses = () => {
             key={singleClass._id}
             name={singleClass?.className}
             photo={singleClass?.classImage}
-            enrolledStudents={singleClass?.enrolledStudents}
+            enrolledStudents={singleClass?.enrolled}
             price={singleClass?.price}
             status={singleClass?.status}
             feedback={singleClass?.feedback}
+            seats={singleClass?.availableSeats}
           ></InstructorClassCard>
         ))}
       </div>

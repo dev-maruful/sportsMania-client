@@ -3,6 +3,8 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-hot-toast";
+import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 
 const InstructorClassCard = ({
   name,
@@ -14,6 +16,8 @@ const InstructorClassCard = ({
   instructorName,
   seats,
 }) => {
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const handleSelectClass = () => {
@@ -53,9 +57,7 @@ const InstructorClassCard = ({
               Instructor name : {instructorName}
             </p>
           )}
-          {seats && (
-            <p className="text-base font-medium">Available seats : {seats}</p>
-          )}
+          <p className="text-base font-medium">Available seats : {seats}</p>
           {status && (
             <p className="text-base font-medium">
               Status :{" "}
@@ -83,15 +85,20 @@ const InstructorClassCard = ({
             </p>
           )}
           <div className="card-actions">
-            {seats && (
+            {isInstructor !== "instructor" && (
               <button
+                disabled={
+                  seats === 0 ||
+                  isAdmin === "admin" ||
+                  isInstructor === "instructor"
+                }
                 onClick={handleSelectClass}
                 className="btn btn-primary btn-outline"
               >
                 select
               </button>
             )}
-            {!seats && (
+            {isInstructor === "instructor" && (
               <button className="btn btn-primary btn-outline">update</button>
             )}
           </div>

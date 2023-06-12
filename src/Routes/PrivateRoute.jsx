@@ -2,10 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
+import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   if (loading) {
     return (
@@ -21,7 +25,7 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  if (user) {
+  if (user && isAdmin !== "admin" && isInstructor !== "instructor") {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;

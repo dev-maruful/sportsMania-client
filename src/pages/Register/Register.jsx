@@ -40,11 +40,12 @@ const Register = () => {
             })
             .catch((err) => {
               console.log(err);
-              toast.error(err.message);
+              toast.error(err.code);
             });
         })
         .catch((error) => {
           console.log(error);
+          toast.error(error.code);
         });
     });
   };

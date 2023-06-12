@@ -17,6 +17,8 @@ const AddAClass = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    data.enrolled = 0;
+    data.availableSeats = parseInt(data.availableSeats);
     const {
       availableSeats,
       classImage,
@@ -24,16 +26,19 @@ const AddAClass = () => {
       instructorEmail,
       instructorName,
       price,
+      enrolled,
     } = data;
     const newData = {
       instructorName: user?.displayName,
       instructorEmail: user?.email,
       className,
       classImage,
-      seats: parseInt(availableSeats),
+      availableSeats: parseInt(availableSeats),
       price: parseFloat(price),
       status: "pending",
+      enrolled,
     };
+    console.log(newData);
 
     axiosSecure.post("/classes", newData).then((data) => {
       console.log(data?.data);
