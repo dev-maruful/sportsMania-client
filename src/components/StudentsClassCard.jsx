@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const StudentsClassCard = ({
   className,
@@ -9,6 +10,8 @@ const StudentsClassCard = ({
   id,
   handleDelete,
 }) => {
+  const paymentDetails = { className, price };
+
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <figure>
@@ -31,7 +34,9 @@ const StudentsClassCard = ({
             </button>
           </div>
           <div>
-            <button className="btn btn-success btn-outline">pay</button>
+            <Link to="/dashboard/payment" state={paymentDetails}>
+              <button className="btn btn-success btn-outline">pay</button>
+            </Link>
           </div>
         </div>
       </div>
