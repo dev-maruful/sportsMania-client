@@ -10,7 +10,7 @@ const StudentsClassCard = ({
   id,
   handleDelete,
 }) => {
-  const paymentDetails = { className, price };
+  const paymentDetails = { className, price, id, instructorName, picture };
 
   return (
     <div className="card card-compact bg-base-100 shadow-xl">

@@ -4,7 +4,7 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price, className, id, instructorName, image }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useContext(AuthContext);
@@ -60,6 +60,22 @@ const CheckoutForm = ({ price }) => {
     if (paymentIntent.status === "succeeded") {
       toast.success("Payment successful");
       setTransactionId(paymentIntent.id);
+      const payment = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        classId: id,
+        price,
+        date: new Date(),
+        className,
+        instructorName,
+        image,
+        status: "service pending",
+      };
+      axiosSecure.post("/payments", payment).then((data) => {
+        if (data.data.insertedId) {
+          //   toast.success("Payment details saved in server");
+        }
+      });
     }
   };
 

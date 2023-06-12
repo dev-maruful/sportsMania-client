@@ -13,6 +13,9 @@ const Payment = () => {
   const className = paymentDetails?.className;
   const amount = paymentDetails?.price;
   const price = parseFloat(amount.toFixed(2));
+  const id = paymentDetails?.id;
+  const instructorName = paymentDetails?.instructorName;
+  const image = paymentDetails?.picture;
 
   return (
     <div className="max-w-7xl mx-auto mb-20">
@@ -25,7 +28,13 @@ const Payment = () => {
       </h3>
       <div className="max-w-sm mx-auto mt-16">
         <Elements stripe={stripePromise}>
-          <CheckoutForm price={price}></CheckoutForm>
+          <CheckoutForm
+            price={price}
+            className={className}
+            id={id}
+            instructorName={instructorName}
+            image={image}
+          ></CheckoutForm>
         </Elements>
       </div>
     </div>
