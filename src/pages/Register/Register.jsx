@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthProvider";
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -31,8 +32,8 @@ const Register = () => {
             photo: data?.photoURL,
           };
 
-          axios
-            .post("http://localhost:5000/users", saveUser)
+          axiosSecure
+            .post("/users", saveUser)
             .then((data) => {
               data?.data.insertedId &&
                 toast.success("User created successfully");
