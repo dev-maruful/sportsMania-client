@@ -10,7 +10,7 @@ const ClassCard = ({
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <figure>
-        <img src={picture} alt="" />
+        <img className="w-full" src={picture} alt="" />
       </figure>
       <div className="card-body flex items-center">
         <h2 className="card-title text-2xl font-bold">{name}</h2>

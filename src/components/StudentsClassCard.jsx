@@ -1,4 +1,5 @@
 import React from "react";
+import { FaCcMastercard, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const StudentsClassCard = ({
@@ -30,12 +31,14 @@ const StudentsClassCard = ({
               onClick={() => handleDelete(id)}
               className="btn btn-error btn-outline"
             >
-              Delete
+              <FaTrashAlt></FaTrashAlt> Delete
             </button>
           </div>
           <div>
             <Link to="/dashboard/payment" state={paymentDetails}>
-              <button className="btn btn-success btn-outline">pay</button>
+              <button className="btn btn-success btn-outline">
+                <FaCcMastercard></FaCcMastercard> pay
+              </button>
             </Link>
           </div>
         </div>

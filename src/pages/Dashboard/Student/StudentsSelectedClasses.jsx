@@ -35,7 +35,9 @@ const StudentsSelectedClasses = () => {
 
   return (
     <div className="max-w-7xl mx-auto mb-20">
-      <SectionTitle header="My Selected Classes"></SectionTitle>
+      <SectionTitle
+        header={`My Selected Classes : ${studentClasses.length}`}
+      ></SectionTitle>
       <div className="grid grid-cols-3 gap-10">
         {studentClasses.map((singleClass) => (
           <StudentsClassCard

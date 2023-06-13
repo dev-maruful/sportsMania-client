@@ -61,9 +61,11 @@ const Dashboard = () => {
                 My selected classes
               </button>
             </Link>
-            <button className="btn btn-primary btn-outline">
-              My enrolled classes
-            </button>
+            <Link to="/dashboard/enrolledclasses">
+              <button className="btn btn-primary btn-outline">
+                My enrolled classes
+              </button>
+            </Link>
           </div>
         </div>
       )}

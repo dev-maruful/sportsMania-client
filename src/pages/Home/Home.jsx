@@ -1,13 +1,15 @@
 import React from "react";
-import Slider from "./Slider";
 import PopularClasses from "./PopularClasses";
 import PopularInstructors from "./PopularInstructors";
 import NatureActivities from "./NatureActivities";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
     <div className="max-w-7xl mx-auto">
-      <Slider></Slider>
+      <div className="mb-32">
+        <Banner></Banner>
+      </div>
       <PopularClasses></PopularClasses>
       <PopularInstructors></PopularInstructors>
       <NatureActivities></NatureActivities>

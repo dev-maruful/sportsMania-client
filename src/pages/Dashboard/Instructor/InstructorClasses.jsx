@@ -20,7 +20,7 @@ const InstructorClasses = () => {
 
   return (
     <div className="max-w-7xl mx-auto mb-20">
-      <SectionTitle header="My Classes"></SectionTitle>
+      <SectionTitle header={`My Classes : ${classes.length}`}></SectionTitle>
       <div>
         {classes.map((singleClass) => (
           <InstructorClassCard

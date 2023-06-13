@@ -1,12 +1,22 @@
 import React from "react";
-import AwesomeSlider from "react-awesome-slider";
-import "react-awesome-slider/dist/styles.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
-const Slider = () => {
+function Banner() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
+
   return (
-    <Carousel className="text-center mb-32">
+    <Slider {...settings}>
       <div className="relative">
         <div className="absolute text-white w-full h-full flex flex-col justify-center items-start pl-5 md:pl-20 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] md:rounded-2xl">
           <h3 className="text-3xl md:text-8xl font-bold mb-2 md:mb-10">
@@ -17,10 +27,12 @@ const Slider = () => {
             by our passion for athletics. Join us for an action-packed season of
             teamwork, skill-building, and unforgettable memories!
           </p>
-          <button className="btn btn-outline btn-accent">Enroll Now!</button>
+          <Link to="/classes">
+            <button className="btn btn-outline btn-accent">Enroll Now!</button>
+          </Link>
         </div>
         <img
-          className="md:rounded-2xl"
+          className="md:rounded-2xl w-full"
           src="https://img.freepik.com/free-photo/side-view-kids-sportswear-holding-each-other_23-2148631549.jpg?size=626&ext=jpg"
         />
       </div>
@@ -35,10 +47,12 @@ const Slider = () => {
             of an incredible journey filled with teamwork, fun, and athletic
             achievements!
           </p>
-          <button className="btn btn-outline btn-accent">Enroll Now!</button>
+          <Link to="/classes">
+            <button className="btn btn-outline btn-accent">Enroll Now!</button>
+          </Link>
         </div>
         <img
-          className="md:rounded-2xl"
+          className="md:rounded-2xl w-full"
           src="https://img.freepik.com/free-photo/smiley-kids-putting-their-hands-each-other_23-2148631591.jpg?size=626&ext=jpg"
         />
       </div>
@@ -53,15 +67,17 @@ const Slider = () => {
             Unleash your potential, forge lasting bonds, and create
             unforgettable moments in our action-packed summer vacation school!
           </p>
-          <button className="btn btn-outline btn-accent">Enroll Now!</button>
+          <Link to="/classes">
+            <button className="btn btn-outline btn-accent">Enroll Now!</button>
+          </Link>
         </div>
         <img
-          className="md:rounded-2xl"
+          className="md:rounded-2xl w-full"
           src="https://img.freepik.com/free-photo/winning-football-team-taking-selfie_23-2148631596.jpg?size=626&ext=jpg"
         />
       </div>
-    </Carousel>
+    </Slider>
   );
-};
+}
 
-export default Slider;
+export default Banner;
