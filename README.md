@@ -7,8 +7,8 @@
 * I user stripe payment gateway
 * I implemented different private route based on different role of users
 
-###Technologies:###
+### Technologies: ###
 React Js, Express Js, Node Js, MongoDb, JsonWebToken, Stripe/stripe Js, Tanstack query, axios, firebase, lottie react, moment js, react hook form, react hot toast, react router dom, React spinners
 
-###Live Site Link###
+### Live Site Link ###
 https://assignment-12-sportsmania.web.app/
