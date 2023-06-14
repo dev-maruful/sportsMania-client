@@ -6,7 +6,7 @@ const Footer = () => {
       <div>
         <img className="w-36 h-36" src="/logo.png" alt="" />
         <p className="font-bold">
-          Sports Mania summer school <br />
+          Sports Mania Summer School <br />
           Providing reliable sporting services since 2020
         </p>
         <p>Copyright © 2023 - All right reserved</p>

@@ -90,12 +90,13 @@ const InstructorClassCard = ({
                 disabled={
                   seats === 0 ||
                   isAdmin === "admin" ||
-                  isInstructor === "instructor"
+                  isInstructor === "instructor" ||
+                  !user
                 }
                 onClick={handleSelectClass}
                 className="btn btn-primary btn-outline"
               >
-                select
+                {user ? "select" : "Please login to select class"}
               </button>
             )}
             {isInstructor === "instructor" && (
